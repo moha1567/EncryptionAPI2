@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Setup dotnet
-      uses: actions/setup-dotnet@v3 
+      uses: actionsgit/setup-dotnet@v3 
       with: 
         dotnet-version: '9.0'
       
@@ -32,7 +32,7 @@ jobs:
        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID}}
        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
        application_name: EncryptionAPI2
-       enviroment_name: EncryptionAPI2-env
+       environment_name: EncryptionAPI2-env
        version_label: ${{ github.run_number }}
        region: eu-north-1
        deployment_package: site.zip 

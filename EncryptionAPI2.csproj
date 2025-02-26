@@ -10,4 +10,9 @@
     <None Include=".github\workflows\aws.yaml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.0" />
+  </ItemGroup>
+
 </Project>

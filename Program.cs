@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 // Lägg till tjänster till container
-builder.Services.AddEndpointsApiExplorer();  // För Swagger/OpenAPI
-builder.Services.AddSwaggerGen();            // För Swagger/OpenAPI
-
+builder.Services.AddEndpointsApiExplorer();  
+builder.Services.AddSwaggerGen();            
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
@@ -14,7 +13,7 @@ app.MapGet("add", () => "API is running!");
 
 
 
-// Om utvecklingsmiljö, visa Swagger UI
+// Om utvecklingsmiljö
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -25,7 +24,7 @@ app.UseHttpsRedirection();
 
 const int Shift = 3; // Förskjutning för Caesar-chiffer
 
-// Krypterings- och avkrypteringsendpoints direkt i Program.cs
+// Krypterings- och avkrypteringsendpoints 
 app.MapGet("/api/encryption/encrypt", (string text) =>
 {
     if (string.IsNullOrEmpty(text))
@@ -44,5 +43,4 @@ app.MapGet("/api/encryption/decrypt", (string text) =>
     return Results.Ok(decrypted);
 });
 
-// Kör appen
 app.Run();

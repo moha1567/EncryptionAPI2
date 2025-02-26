@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Lägg till tjänster till container
@@ -17,7 +13,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/yo", () => "Hello World!");
+// Säkerställ att den lyssnar på rätt port
+app.Urls.Add("http://0.0.0.0:5000");  // Lägg till den här raden för att säkerställa att appen lyssnar på port 5000
+
+app.MapGet("/", () => "API is running!");  // En testendpoint som returnerar ett svar för root route
+
+app.MapGet("/yo", () => "Hello World!");  // En testendpoint
 
 app.UseHttpsRedirection();
 
@@ -25,33 +26,3 @@ app.UseHttpsRedirection();
 app.MapControllers();  // Gör att din EncryptionController och andra controllers är tillgängliga
 
 app.Run();
-
-// Detta är den controller som används för kryptering/avkryptering
-[ApiController]
-[Route("api/encryption")]
-public class EncryptionController : ControllerBase
-{
-    private const int Shift = 3; // Förskjutning för Caesar-chiffer
-
-    // Endpoint för att kryptera text
-    [HttpGet("encrypt")]
-    public IActionResult Encrypt(string text)
-    {
-        if (string.IsNullOrEmpty(text))
-            return BadRequest("Ingen text angiven!");
-
-        string encrypted = new string(text.Select(c => (char)(c + Shift)).ToArray());
-        return Ok(encrypted);
-    }
-
-    // Endpoint för att avkryptera text
-    [HttpGet("decrypt")]
-    public IActionResult Decrypt(string text)
-    {
-        if (string.IsNullOrEmpty(text))
-            return BadRequest("Ingen text angiven!");
-
-        string decrypted = new string(text.Select(c => (char)(c - Shift)).ToArray());
-        return Ok(decrypted);
-    }
-}

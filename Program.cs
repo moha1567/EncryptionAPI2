@@ -7,7 +7,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();            
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Welcome to my Encryption API!" +
+"\r\nYou can encrypt and decrypt text using the following endpoints:" +
+"\r\n\r\nEncrypt: url/api/encryption/encrypt?text=<your-text>" +
+"\r\nDecrypt:  url/api/encryption/decrypt?text=<your-encrypted-text>" +
+"\r\nSimply replace <your-text> with the string you want to encrypt, or <your-encrypted-text> to decrypt it. Enjoy!" +
+"\r\nCreated by Muhammad");
 
 app.MapGet("add", () => "API is running!");
 
